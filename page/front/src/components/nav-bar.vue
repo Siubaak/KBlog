@@ -1,0 +1,103 @@
+<template>
+  <div id="nav-bar">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-narbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>          
+          <router-link class="navbar-brand" to="/" @click.native="clickHome">
+            邱焱坤<small>的博客</small>
+          </router-link>
+        </div>
+        <div class="collapse navbar-collapse" id="collapse-narbar">
+          <ul class="nav navbar-nav">
+            <li :class="{ 'active': isHomeActive }">
+              <router-link to="/" @click.native="clickHome">
+                <small><span class="glyphicon glyphicon-home" aria-hidden="true"></span></small> 首页
+              </router-link>
+            </li>
+            <li :class="{ 'dropdown': true, 'active': isClassActive }">
+              <a href="#" class="dropdown-toggle"
+                 data-toggle="dropdown" role="button"
+                 aria-haspopup="true" aria-expanded="false">
+                <small><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></small> 分类
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li v-for="classification in classificationList">
+                  <router-link :to="'/classification/' + classification.name" @click.native="clickClass">
+                    <small><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></small>{{ classification.name }}
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+            <li :class="{ 'active': isAboutActive }">
+              <router-link to="/about" @click.native="clickAbout">
+                <small><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></small> 关于
+              </router-link>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <div class="form-group has-feedback">
+              <input type="text" class="form-control" placeholder="搜索...">
+              <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+</template>
+
+<script>
+import api from '../api'
+export default {
+  data () {
+    return {
+      classificationList: [],
+      isHomeActive: true,
+      isClassActive: false,
+      isAboutActive: false
+    }
+  },
+  methods: {
+    clickHome () {
+      this.isHomeActive = true
+      this.isClassActive = false
+      this.isAboutActive = false
+    },
+    clickClass () {
+      this.isHomeActive = false
+      this.isClassActive = true
+      this.isAboutActive = false
+    },
+    clickAbout () {
+      this.isHomeActive = false
+      this.isClassActive = false
+      this.isAboutActive = true
+    }
+  },
+  created () {
+    var self = this
+    api.getClassificationList()
+        .then(function (res) {
+          self.classificationList = res.data.classList
+          console.log('-- Successful Receive')
+        })
+        .catch(function (err) {
+          console.log(err)
+          console.log('-- Error Receive')
+        })
+  }
+}
+</script>
+
+<style scoped>
+.profile {
+  border-radius: 3px;
+  width: 40px;
+}
+</style>
