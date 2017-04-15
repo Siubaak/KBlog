@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken')
-module.exports = function (req, res, next) {
+module.exports = (req, res, next) => {
   if (req.headers['authorization']) {
     var token = req.headers['authorization'].split(' ')[1]
       var decoded = jwt.decode(token, process.env.JWT_SECRET)

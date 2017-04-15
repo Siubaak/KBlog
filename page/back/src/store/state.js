@@ -1,4 +1,4 @@
-var logToken = function () {
+var logToken = () => {
   var token = localStorage.getItem('jwt')
   if (token) {
     console.log(token)

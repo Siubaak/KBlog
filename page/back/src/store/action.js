@@ -4,23 +4,20 @@ import message from './message'
 export default {
   adminLogin({ commit }, data) {
     api.login(data)
-      .then(function ({ data }) {
+      .then(({ data }) => {
         if (data.code == 200) {
-          // 找到用户
-          commit('USER_SIGNIN', data.token)
+          commit('ADMIN_LOGIN', data.token)
           router.replace({ path: '/admin/articleList' })
         } else {
-          // 没找到用户或者密码不对
-          MsgAlert(data.message)
+          message(data.message)
         }
       })
-      .catch(function (error) {
-        // 一般服务器连接不上这里就会报网络错误
-        message(error.toString())
+      .catch((err) => {
+        message(err.toString())
       })
   },
   adminLogout({ commit }) {
-    commit('USER_SIGNOUT');
+    commit('ADMIN_LOGOUT');
     router.push({ path: '/login' });
   }
 }

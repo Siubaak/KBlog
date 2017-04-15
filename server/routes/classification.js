@@ -3,23 +3,23 @@ var express = require('express'),
     router = express.Router(),
     api = require('../api')
 
-router.post('/classification/list', function (req, res) {
+router.post('/classification/list', (req, res) => {
   console.log('POST /api/classification/list')
   // console.log(req.body)
   var { name, page, number } = req.body
   api.getArticleListByClassification(name, page, number)
-     .then(function (articleList) {
+     .then((articleList) => {
        res.send({ articleList })
-     }).catch(function (err) {
+     }).catch((err) => {
        res.send({ err })
      })
 })
-router.get('/classification/name', function (req, res) {
+router.get('/classification/name', (req, res) => {
   console.log('GET /api/classification/name')
   api.getClassificationList()
-     .then(function (classList) {
+     .then((classList) => {
        res.send({ classList })
-     }).catch(function (err) {
+     }).catch((err) => {
        res.send({ err })
      })
 })

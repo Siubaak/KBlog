@@ -1,17 +1,24 @@
 var express = require('express'),
     path = require('path'),
     router = express.Router(),
-    api = require('../api')
+    api = require('../api'),
+    tokenCreate = require('../token-mw/token-create'),
+    sha1 = require('sha1'),
+    dotenv = require('dotenv')
 
-router.post('/article/one', function (req, res) {
-  console.log('POST /api/article/one')
+dotenv.load()
+
+router.post('/login', (req, res) => {
+  console.log('POST /api/login')
+  var account = req.body.account,
+      password = req.body.password
   // console.log(req.body)
-  var articleId = req.body.articleId
-  api.getOneArticle(articleId)
-     .then(function (article) {
-       res.send({ article })
-     }).catch(function (err) {
-       res.send({ err })
+  api.getAdminByAccount(account)
+     .then((Admin) => {
+
+     })
+     .catch((err) => {
+       
      })
 })
 

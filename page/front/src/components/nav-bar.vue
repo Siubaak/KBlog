@@ -81,13 +81,12 @@ export default {
     }
   },
   created () {
-    var self = this
     api.getClassificationList()
-        .then(function (res) {
-          self.classificationList = res.data.classList
+        .then((res) => {
+          this.classificationList = res.data.classList
           console.log('-- Successful Receive')
         })
-        .catch(function (err) {
+        .catch((err) => {
           console.log(err)
           console.log('-- Error Receive')
         })

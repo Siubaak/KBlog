@@ -29,8 +29,8 @@ export default {
   },
   directives: {
     scroll: {
-      bind: function (el, binding) {
-        window.addEventListener('scroll', function () {
+      bind: (el, binding) => {
+        window.addEventListener('scroll', () => {
           if (document.body.scrollTop + window.innerHeight === document.body.scrollHeight) {
             (binding.value)()
           }
@@ -57,24 +57,23 @@ export default {
       }
     },
     loadArticles () {
-      var self = this
-      if (!self.isLoading && !self.isAll) {
-        self.isLoading = true
-        self.loadApi({ name: this.$route.params.name, page: self.page, number: self.number })
-          .then(function (res) {
+      if (!this.isLoading && !this.isAll) {
+        this.isLoading = true
+        this.loadApi({ name: this.$route.params.name, page: this.page, number: this.number })
+          .then((res) => {
             if (res.data.articleList.length) {
-              self.articles = self.articles.concat(res.data.articleList)
-              self.page++
+              this.articles = this.articles.concat(res.data.articleList)
+              this.page++
               console.log('-- Successful Receive')
             } else {
-              self.isAll = true
+              this.isAll = true
             }
-            self.isLoading = false
+            this.isLoading = false
           })
-          .catch(function (err) {
+          .catch((err) => {
             console.log(err)
             console.log('-- Error Receive')
-            self.isLoading = false
+            this.isLoading = false
           })
       }
     }

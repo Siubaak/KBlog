@@ -3,26 +3,26 @@ var express = require('express'),
     router = express.Router(),
     api = require('../api')
 
-router.post('/article/one', function (req, res) {
+router.post('/article/one', (req, res) => {
   console.log('POST /api/article/one')
   // console.log(req.body)
   var articleId = req.body.articleId
   api.getOneArticle(articleId)
-     .then(function (article) {
+     .then((article) => {
        res.send({ article })
-     }).catch(function (err) {
+     }).catch((err) => {
        res.send({ err })
      })
 })
 
-router.post('/article/list', function (req, res) {
+router.post('/article/list', (req, res) => {
   console.log('POST /api/article/list')
   // console.log(req.body)
   var { page, number } = req.body
   api.getArticleList(page, number)
-     .then(function (articleList) {
+     .then((articleList) => {
        res.send({ articleList })
-     }).catch(function (err) {
+     }).catch((err) => {
        res.send({ err })
      })
 })

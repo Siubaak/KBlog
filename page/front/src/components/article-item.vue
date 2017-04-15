@@ -71,25 +71,24 @@ export default {
   props: ['articleInput'],
   methods: {
     submit () {
-      var self = this
-      if (self.comment.user && self.comment.msg) {
-        api.createComment(self.comment)
-          .then(function (res) {
-            api.getOneArticle({ articleId: self.article._id })
-              .then(function (res) {
+      if (this.comment.user && this.comment.msg) {
+        api.createComment(this.comment)
+          .then((res) => {
+            api.getOneArticle({ articleId: this.article._id })
+              .then((res) => {
                 if (res.data.article) {
-                  self.article = res.data.article[0]
-                  self.comment.user = ''
-                  self.comment.msg = ''
+                  this.article = res.data.article[0]
+                  this.comment.user = ''
+                  this.comment.msg = ''
                   console.log('-- Successful Create and Refresh')
                 }
               })
-              .catch(function (err) {
+              .catch((err) => {
                 console.log(err)
                 console.log('-- Error Create')
               })
           })
-          .catch(function (err) {
+          .catch((err) => {
             console.log(err)
             console.log('-- Error Create')
           })

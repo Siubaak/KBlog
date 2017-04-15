@@ -1,6 +1,0 @@
-const USER_SIGNIN = 'USER_SIGNIN'
-const USER_SIGNOUT = 'USER_SIGNOUT'
-export default {
-  USER_SIGNIN,
-  USER_SIGNOUT
-}

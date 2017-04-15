@@ -1,5 +1,5 @@
 import Vue from 'vue'
-export default function (message) {
+export default (message) => {
   Vue.prototype.$message({
     message,
     type: 'error',

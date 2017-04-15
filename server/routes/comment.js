@@ -3,13 +3,13 @@ var express = require('express'),
     router = express.Router(),
     api = require('../api')
 
-router.post('/comment/create', function (req, res) {
+router.post('/comment/create', (req, res) => {
   console.log('POST /api/comment/create')
   var comment = req.body
   api.createComment(comment)
-     .then(function (result) {
+     .then((result) => {
        res.send({ result })
-     }).catch(function (err) {
+     }).catch((err) => {
        res.send({ err })
      })
 })
