@@ -2,14 +2,14 @@ var Mongolass = require('mongolass'),
     mongolass = new Mongolass(),
     moment = require('moment'),
     idToTs = require('objectid-to-timestamp'),
-    Admin = mongolass.model('Admin', {
+    Admins = mongolass.model('Admin', {
       account: { type: 'string' },
       password: { type: 'string' }
     }),
-    Classification = mongolass.model('Classification', {
+    Classifications = mongolass.model('Classification', {
       name: { type: 'string' }
     }),
-    Article = mongolass.model('Article', {
+    Articles = mongolass.model('Article', {
       title: { type: 'string' },
       intro: { type: 'string' },
       body: { type: 'string' },
@@ -41,8 +41,8 @@ mongolass.plugin('addDate', {
 })
 
 module.exports = {
-  Admin,
-  Classification,
-  Article,
+  Admins,
+  Classifications,
+  Articles,
   Comments
 }

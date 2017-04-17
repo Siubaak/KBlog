@@ -16,8 +16,8 @@
       <div class="panel-body">
         <section class="sec-intro">{{ article.intro }}</section>
         <small><span class="glyphicon glyphicon-time"></span></small> {{ article.date }}
-        <div v-show="article.comments.length" class="pull-right">
-          <small><span class="p-color glyphicon glyphicon-comment"></span></small> ({{ article.comments.length }})
+        <div v-show="comments.length" class="pull-right">
+          <small><span class="p-color glyphicon glyphicon-comment"></span></small> ({{ comments.length }})
         </div>
       </div>
       <div :id="article._id" class="panel-collapse collapse">
@@ -40,7 +40,7 @@
               </form>
             </div>
           </div>
-          <div class="well well-sm" v-for="commentItem of article.comments">
+          <div class="well well-sm" v-for="commentItem of comments">
             <small><span class="glyphicon glyphicon-user"></span></small>
             <strong class="p-color">{{ commentItem.user }} </strong>
             <small><span class="glyphicon glyphicon-time"></span></small>
@@ -57,35 +57,33 @@
 <script>
 import api from '../api'
 export default {
+  props: ['article'],
   data () {
     return {
-      article: this.articleInput,
+      comments: this.article.comments,
       comment: {
         user: '',
         msg: '',
-        articleId: this.articleInput._id
+        articleId: this.article._id
       },
       isArticleCollaspe: false
     }
   },
-  props: ['articleInput'],
   methods: {
     submit () {
       if (this.comment.user && this.comment.msg) {
         api.createComment(this.comment)
           .then((res) => {
-            api.getOneArticle({ articleId: this.article._id })
+            api.getCommentListByArticle({ articleId: this.article._id })
               .then((res) => {
-                if (res.data.article) {
-                  this.article = res.data.article[0]
-                  this.comment.user = ''
-                  this.comment.msg = ''
-                  console.log('-- Successful Create and Refresh')
-                }
+                this.comments = res.data.commentList
+                this.comment.user = ''
+                this.comment.msg = ''
+                console.log('-- Successful Create and Refresh')
               })
               .catch((err) => {
                 console.log(err)
-                console.log('-- Error Create')
+                console.log('-- Successful Create but Error Refresh')
               })
           })
           .catch((err) => {

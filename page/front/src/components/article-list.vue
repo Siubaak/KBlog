@@ -1,7 +1,7 @@
 <template>
   <div id="article-list" v-scroll="loadArticles">
     <div v-for="article in articles">
-      <article-item :articleInput="article"></article-item>
+      <article-item :article="article"></article-item>
     </div>
     <div class="well well-sm" v-show="isAll">
       <div class="note" v-show="!isLoading">
@@ -65,6 +65,9 @@ export default {
               this.articles = this.articles.concat(res.data.articleList)
               this.page++
               console.log('-- Successful Receive')
+            } else if (res.data.err) {
+              console.log(res.data.err)
+              console.log('-- Error Receive')
             } else {
               this.isAll = true
             }
