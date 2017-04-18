@@ -6,7 +6,6 @@ import Admin from '../components/admin'
 import ArticleList from '../components/article-list'
 import ClassList from '../components/class-list'
 import CommentList from '../components/comment-list'
-import Editor from '../components/editor'
 
 Vue.use(Router)
 
@@ -35,11 +34,6 @@ var router = new Router({
       path: 'comment',
       name: 'comment-list',
       component: CommentList
-    },
-    {
-      path: 'editor',
-      name: 'editor',
-      component: Editor
     }]
   }]
 })

@@ -1,11 +1,6 @@
 <template>
-  <div id="editor">
+  <div id="editor" class="editor">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          编辑
-        </h4>
-      </div>
       <div class="panel-body">
         <form action="">
           <div class="form-group">
@@ -46,6 +41,9 @@
 <script>
 export default {
   data () {
+    return {
+      article: {}
+    }
   },
   methods: {
   }
@@ -55,5 +53,11 @@ export default {
 <style scoped>
 textarea {
   resize: none;
+}
+.editor {
+  margin-top: 10px;
+}
+.panel {
+  margin-bottom: 0px;
 }
 </style>

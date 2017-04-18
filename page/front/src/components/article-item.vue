@@ -20,7 +20,7 @@
           <small><span class="p-color glyphicon glyphicon-comment"></span></small> ({{ comments.length }})
         </div>
       </div>
-      <div :id="article._id" class="panel-collapse collapse">
+      <div :id="article._id" class="collapse">
         <div class="panel-body">
           <div class="article-content" v-html="article.body"></div>
           <button type="button" class="btn btn-sm btn-primary btn-comment" data-toggle="collapse" 
@@ -40,7 +40,7 @@
               </form>
             </div>
           </div>
-          <div class="well well-sm" v-for="commentItem of comments">
+          <div class="well well-sm" v-for="commentItem in comments">
             <small><span class="glyphicon glyphicon-user"></span></small>
             <strong class="p-color">{{ commentItem.user }} </strong>
             <small><span class="glyphicon glyphicon-time"></span></small>
@@ -101,10 +101,10 @@ export default {
   padding-bottom: 10px;
 }
 .btn-comment {
-  margin-bottom: 18px;
+  margin-bottom: 7px;
 }
 .comment-box {
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 }
 .article-content {
   margin-top: -10px;
@@ -119,7 +119,8 @@ textarea {
   font-weight: 400;
 }
 .well-sm {
-  margin-bottom: 9px;
+  margin-bottom: 7px;
+  padding: 7px;
 }
 .p-color {
   color: #337AB7;

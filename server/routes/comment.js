@@ -19,8 +19,8 @@ router.post('/comment/create', (req, res) => {
 })
 
 // 后台API处理路由，带权限
-router.post('/comment/remove', tokenCheck, (req, res) => {
-  console.log('POST /api/comment/remove')
+router.post('/token/comment/remove', tokenCheck, (req, res) => {
+  console.log('POST /api/token/comment/remove')
   var commentId = req.body.commentId
   api.removeComment(commentId)
      .then((result) => {
@@ -30,6 +30,18 @@ router.post('/comment/remove', tokenCheck, (req, res) => {
        res.send({ err })
        console.log('-- Error Response')
      })
-}
+})
+router.post('/token/comment/list', tokenCheck, (req, res) => {
+  console.log('POST /api/token/comment/list')
+  var { page, number } = req.body
+  api.getCommentList(page, number)
+     .then((commentList) => {
+       res.send({ commentList })
+       console.log('-- Successful Response')
+     }).catch((err) => {
+       res.send({ err })
+       console.log('-- Error Response')
+     })
+})
 
 module.exports = router

@@ -42,7 +42,7 @@ router.post('/token/classification/create', tokenCheck, (req, res) => {
        res.send({ err })
        console.log('-- Error Response')
      })
-}
+})
 router.post('/token/classification/remove', tokenCheck, (req, res) => {
   console.log('POST /api/classification/remove')
   var classificationId = req.body.classificationId
@@ -54,7 +54,7 @@ router.post('/token/classification/remove', tokenCheck, (req, res) => {
        res.send({ err })
        console.log('-- Error Response')
      })
-}
+})
 router.post('/token/classification/update', tokenCheck, (req, res) => {
   console.log('POST /api/classification/update')
   var classification = req.body
@@ -66,7 +66,7 @@ router.post('/token/classification/update', tokenCheck, (req, res) => {
        res.send({ err })
        console.log('-- Error Response')
      })
-}
+})
 router.get('/token/classification/list', tokenCheck, (req, res) => {
   console.log('GET /api/token/classification/list')
   api.getClassificationList()

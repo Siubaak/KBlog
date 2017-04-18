@@ -28,11 +28,6 @@
               </router-link>
             </li>
           </ul>
-          <router-link to="/admin/editor" @click.native="clickNew">
-            <button type="button" class="btn btn-primary navbar-btn pull-right">
-              <small><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></small> 写博客
-            </button>
-          </router-link>
         </div>
       </div>
     </nav>

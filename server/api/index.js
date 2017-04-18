@@ -36,7 +36,6 @@
        async.map(comments, (commentItem, callback) => {
          Articles.findOne({ _id: commentItem.articleId })
                  .exec()
-                 .addDate()
                  .then((article) => {
                    commentItem.article = article
                    callback(null, commentItem)
@@ -86,7 +85,7 @@ module.exports = {
   updateArticle (article) {
     return Articles.update({ _id: article._id }, { $set: article })
                    .exec()
-  }
+  },
   // 根据文章ID获取一篇文章
   getArticle (articleId) {
     return new Promise((resolve, reject) => {
@@ -177,7 +176,7 @@ module.exports = {
   updateClassification (classification) {
     return Classifications.update({ _id: classification._id }, { $set: classification })
                           .exec()
-  }
+  },
   // 获取分类
   getClassificationList() {
     return Classifications.find()
@@ -211,46 +210,45 @@ module.exports = {
   createComment (comment) {
     return Comments.create(comment)
                    .exec()
-  }
+  },
   // 根据评论ID删除评论
   removeComment (commentId) {
     return Comments.remove({ _id: commentId })
                    .exec()
   },
   // 获取一定数量的评论及对应文章标题，page为页数，number为数量，page从0开始，number不为负数
-  getCommentList (number) {
-      if (number) {
-        // 当number不为0时，数据库查询跳过page*number数量
-        var skip = page*number
-        return new Promise((resolve, reject) => {
-          Comments.find()
-                  .addDate()
-                  .sort({ _id: -1 })
-                  .skip(skip)
-                  .limit(number)
-                  .exec()
-                  .then((comments) => {
-                    ArticleQuery(comments, resolve, reject)
-                  })
-                  .catch((err) => {
-                    reject(err)
-                  })
-        })
-      } else {
-        // 当number为0时，则获取所有评论
-        return new Promise((resolve, reject) => {
-          Comments.find()
-                  .addDate()
-                  .sort({ _id: -1 })
-                  .exec()
-                  .then((comments) => {
-                    ArticleQuery(comments, resolve, reject)
-                  })
-                  .catch((err) => {
-                    reject(err)
-                  })
-        })
-      }
-    })
+  getCommentList (page, number) {
+    if (number) {
+      // 当number不为0时，数据库查询跳过page*number数量
+      var skip = page*number
+      return new Promise((resolve, reject) => {
+        Comments.find()
+                .addDate()
+                .sort({ _id: -1 })
+                .skip(skip)
+                .limit(number)
+                .exec()
+                .then((comments) => {
+                  ArticleQuery(comments, resolve, reject)
+                })
+                .catch((err) => {
+                  reject(err)
+                })
+      })
+    } else {
+      // 当number为0时，则获取所有评论
+      return new Promise((resolve, reject) => {
+        Comments.find()
+                .addDate()
+                .sort({ _id: -1 })
+                .exec()
+                .then((comments) => {
+                  ArticleQuery(comments, resolve, reject)
+                })
+                .catch((err) => {
+                  reject(err)
+                })
+      })
+    }
   }
 }

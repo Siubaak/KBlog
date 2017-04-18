@@ -15,11 +15,9 @@
 
 <script>
 import navBar from './nav-bar'
-import editor from './editor'
 export default {
   components: {
-    navBar,
-    editor
+    navBar
   }
 }
 </script>
