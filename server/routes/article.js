@@ -32,6 +32,42 @@ router.post('/article/commentlist', (req, res) => {
 })
 
 // 后台API处理路由，带权限
+router.post('/token/article/create', tokenCheck, (req, res) => {
+  console.log('POST /api/token/article/create')
+  var article = req.body
+  api.createArticle(article)
+     .then((result) => {
+       res.send({ result })
+       console.log('-- Successful Response')
+     }).catch((err) => {
+       res.send({ err })
+       console.log('-- Error Response')
+     })
+})
+router.post('/token/article/remove', tokenCheck, (req, res) => {
+  console.log('POST /api/token/article/remove')
+  var articleId = req.body.articleId
+  api.removeArticle(articleId)
+     .then((result) => {
+       res.send({ result })
+       console.log('-- Successful Response')
+     }).catch((err) => {
+       res.send({ err })
+       console.log('-- Error Response')
+     })
+})
+router.post('/token/article/update', tokenCheck, (req, res) => {
+  console.log('POST /api/token/article/update')
+  var article = req.body
+  api.updateArticle(article)
+     .then((result) => {
+       res.send({ result })
+       console.log('-- Successful Response')
+     }).catch((err) => {
+       res.send({ err })
+       console.log('-- Error Response')
+     })
+})
 router.post('/token/article', tokenCheck, (req, res) => {
   console.log('POST /api/token/article')
   // console.log(req.body)
@@ -47,7 +83,6 @@ router.post('/token/article', tokenCheck, (req, res) => {
 })
 router.post('/token/article/list', tokenCheck, (req, res) => {
   console.log('POST /api/token/article/list')
-  // console.log(req.body)
   var { page, number } = req.body
   api.getArticleList(page, number)
      .then((articleList) => {

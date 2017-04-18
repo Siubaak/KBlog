@@ -4,7 +4,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            登录
+            后台管理
           </h4>
         </div>
         <div class="panel-body">

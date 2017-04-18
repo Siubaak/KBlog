@@ -14,33 +14,24 @@
           </div>
           <div class="form-group">
             <label for="class">分类</label>
-            <div class="row" id="class">
-              <div class="col-xs-6">
-                <select class="form-control">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-              <div class="col-xs-6">
-                <button class="btn btn-default">
-                  <small><span class="glyphicon glyphicon-plus"></span></small> 新建分类
-                </button>
-              </div>
-            </div>
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
           </div>
           <div class="form-group">
             <label for="intro">简介</label>
             <textarea type="text" class="form-control comment-box" id="intro"
-                          rows="5" required>
+                      rows="5" required>
             </textarea>
           </div>
           <div class="form-group">
             <label for="content">内容</label>
             <textarea type="text" class="form-control comment-box" id="content"
-                          rows="30" required>
+                      rows="30" required>
             </textarea>
           </div>
           <button type="submit" class="btn btn-primary">

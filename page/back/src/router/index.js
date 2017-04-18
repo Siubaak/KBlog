@@ -37,7 +37,7 @@ var router = new Router({
       component: CommentList
     },
     {
-      path: 'editor/:articleId',
+      path: 'editor',
       name: 'editor',
       component: Editor
     }]

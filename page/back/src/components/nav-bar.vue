@@ -13,22 +13,22 @@
         <div class="collapse navbar-collapse" id="collapse-narbar">
           <ul class="nav navbar-nav">
             <li :class="{ active: isArticleListActive }">
-              <router-link to="/about" @click.native="clickArticleList">
+              <router-link to="/admin" @click.native="clickArticleList">
                 <small><span class="glyphicon glyphicon-file" aria-hidden="true"></span></small> 文章
               </router-link>
             </li>
             <li :class="{ active: isClassListActive }">
-              <router-link to="/about" @click.native="clickClassList">
+              <router-link to="/admin/classification" @click.native="clickClassList">
                 <small><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></small> 分类
               </router-link>
             </li>
             <li :class="{ active: isCommentListActive }">
-              <router-link to="/" @click.native="clickCommentList">
+              <router-link to="/admin/comment" @click.native="clickCommentList">
                 <small><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></small> 评论
               </router-link>
             </li>
           </ul>
-          <router-link to="/about" @click.native="clickNew">
+          <router-link to="/admin/editor" @click.native="clickNew">
             <button type="button" class="btn btn-primary navbar-btn pull-right">
               <small><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></small> 写博客
             </button>
