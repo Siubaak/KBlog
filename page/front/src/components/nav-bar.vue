@@ -40,12 +40,6 @@
               </router-link>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <div class="form-group has-feedback">
-              <input type="text" class="form-control" placeholder="搜索...">
-              <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
-            </div>
-          </form>
         </div>
       </div>
     </nav>

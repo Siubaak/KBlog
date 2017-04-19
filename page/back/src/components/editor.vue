@@ -3,7 +3,7 @@
     <form role="form" @submit.prevent="saveArticle">
       <div class="form-group">
         <label for="title">标题</label>
-        <input type="text" class="form-control" id="title" required v-model="article.title">
+        <input type="text" class="form-control" id="title" v-model="article.title" required>
       </div>
       <div class="form-group">
         <label for="class">分类</label>
@@ -33,21 +33,28 @@
 <script>
 import api from '../api'
 export default {
-  props: ['articleItem', 'isNew'],
+  props: ['articleItem', 'classifications'],
   data () {
     return {
       article: {
         _id: this.articleItem._id,
         title: this.articleItem.title,
-        classificationId: this.articleItem.classificationId,
-        classification: this.articleItem.classification,
         intro: this.articleItem.intro,
-        body: this.articleItem.body
-      },
-      classifications: []
+        body: this.articleItem.body,
+        classificationId: this.articleItem.classificationId,
+        classification: this.articleItem.classification
+      }
     }
   },
   methods: {
+    reset () {
+      this.article._id = ''
+      this.article.title = ''
+      this.article.intro = ''
+      this.article.body = ''
+      this.article.classificationId = ''
+      this.article.classification = ''
+    },
     classificationIdQuery (name) {
       for (var classificationItem of this.classifications) {
         if (classificationItem.name === name) {
@@ -55,19 +62,8 @@ export default {
         }
       }
     },
-    loadClassifications () {
-      api.getClassificationList()
-        .then((res) => {
-          this.classifications = res.data.classList
-          console.log('-- Successful Receive')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Receive')
-        })
-    },
     loadApi () {
-      if (this.isNew) {
+      if (!this.articleItem._id) {
         return api.createArticle(this.article)
       } else {
         return api.updateArticle(this.article)
@@ -77,6 +73,10 @@ export default {
       this.article.classificationId = this.classificationIdQuery(this.article.classification)
       this.loadApi()
         .then((result) => {
+          if (!this.articleItem._id) {
+            // 新建文章后清空数据
+            this.reset()
+          }
           this.$emit('save')
           console.log('-- Successful Update')
         })
@@ -87,7 +87,6 @@ export default {
     }
   },
   created () {
-    this.loadClassifications()
   }
 }
 </script>

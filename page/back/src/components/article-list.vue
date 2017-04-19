@@ -11,7 +11,9 @@
         <li class="list-group-item">
           <button type="button" data-toggle="collapse"
             href="#new-article" class="btn btn-primary btn-group btn-group-justified">新建文章</button>
-          <editor id="new-article" class="collapse" :articleItem="{}" :isNew="true" @save="loadArticles"></editor>
+          <editor id="new-article" class="collapse"
+            :articleItem="{}" :classifications="classifications" @save="loadArticles">
+          </editor>
         </li>
         <li class="list-group-item" v-for="(articleItem, index) in articles">
           <small><span class="glyphicon glyphicon-file"></span></small>
@@ -37,7 +39,9 @@
                 </li>
               </ul>
             </div>
-            <editor :id="articleItem._id" class="collapse" :articleItem="articleItem" :isNew="false" @save="loadArticles"></editor>
+            <editor v-if="isEditorShow" :id="articleItem._id" class="collapse"
+              :articleItem="articleItem" :classifications="classifications" @save="loadArticles">
+            </editor>
           </div>
         </li>
         <li class="list-group-item" v-show="!articles.length">没有文章</li>
@@ -52,7 +56,9 @@ import api from '../api'
 export default {
   data () {
     return {
+      isEditorShow: true,
       ok: '',
+      classifications: [],
       articles: [],
       page: 0,
       number: 0
@@ -63,9 +69,22 @@ export default {
   },
   methods: {
     loadArticles () {
+      this.isEditorShow = false
       api.getArticleList({ page: this.page, number: this.number })
         .then((res) => {
           this.articles = res.data.articleList
+          this.isEditorShow = true
+          console.log('-- Successful Receive')
+        })
+        .catch((err) => {
+          console.log(err)
+          console.log('-- Error Receive')
+        })
+    },
+    loadClassifications () {
+      api.getClassificationList()
+        .then((res) => {
+          this.classifications = res.data.classList
           console.log('-- Successful Receive')
         })
         .catch((err) => {
@@ -90,6 +109,7 @@ export default {
   },
   created () {
     this.loadArticles()
+    this.loadClassifications()
   }
 }
 </script>

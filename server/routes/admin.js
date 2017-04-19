@@ -14,7 +14,7 @@ router.post('/login', (req, res) => {
   var { account, password } = req.body
   api.getAdmin(account)
      .then((admin) => {
-       if (admin && (password === admin.password)) {
+       if (admin && (sha1(password) === admin.password)) {
          res.send({ token: tokenCreate(account) })
        } else {
          res.send({ msg: '用户名或密码错误' })

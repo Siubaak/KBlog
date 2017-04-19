@@ -22,7 +22,7 @@
       </div>
       <div :id="article._id" class="collapse">
         <div class="panel-body">
-          <div class="article-content" v-html="article.body"></div>
+          <div class="article-content" v-html="body"></div>
           <button type="button" class="btn btn-default btn-comment btn-group btn-group-justified" data-toggle="collapse" 
                   :href="'#' + article._id + 'comment'" aria-expanded="false" aria-controls="collapseExample">
             <small><span class="glyphicon glyphicon-comment"></span></small> 评论
@@ -56,10 +56,14 @@
 
 <script>
 import api from '../api'
+import marked from 'marked'
+import highlight from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
 export default {
   props: ['article'],
   data () {
     return {
+      body: '',
       comments: this.article.comments,
       comment: {
         user: '',
@@ -92,6 +96,14 @@ export default {
           })
       }
     }
+  },
+  created () {
+    marked.setOptions({
+      highlight: (code) => {
+        return highlight.highlightAuto(code).value;
+      }
+    })
+    this.body = marked(this.article.body)
   }
 }
 </script>
