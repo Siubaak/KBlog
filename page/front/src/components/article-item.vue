@@ -100,7 +100,7 @@ export default {
   created () {
     marked.setOptions({
       highlight: (code) => {
-        return highlight.highlightAuto(code).value;
+        return highlight.highlightAuto(code).value
       }
     })
     this.body = marked(this.article.body)
