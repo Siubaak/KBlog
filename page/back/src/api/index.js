@@ -5,13 +5,15 @@ if (localStorage.getItem('jwt')) {
 }
 
 export default {
+// 登录API
   adminLogin (objectAccountPassword) {
     console.log('Logining...')
     return axios.post('/api/login', objectAccountPassword)
   },
-  getArticleList (objectPageNumber) {
-    console.log('Requesting Articles...')
-    return axios.post('/api/token/article/list', objectPageNumber)
+// 文章API
+  createArticle (objectArticle) {
+    console.log('Creating Article...')
+    return axios.post('/api/token/article/create', objectArticle)
   },
   removeArticle (objectArticleId) {
     console.log('Removing Article...')
@@ -21,10 +23,11 @@ export default {
     console.log('Updating Article...')
     return axios.post('/api/token/article/update', objectArticle)
   },
-  getClassificationList () {
-    console.log('Requesting Classifications...')
-    return axios.get('/api/token/classification/list')
+  getArticleList (objectPageNumber) {
+    console.log('Requesting Articles...')
+    return axios.post('/api/token/article/list', objectPageNumber)
   },
+// 分类API
   createClassification (objectName) {
     console.log('Creating Classification...')
     return axios.post('/api/token/classification/create', objectName)
@@ -37,12 +40,17 @@ export default {
     console.log('Updating Classification...')
     return axios.post('/api/token/classification/update', objectClassification)
   },
-  getCommentList (objectPageNumber) {
-    console.log('Requesting Comments...')
-    return axios.post('/api/token/comment/list', objectPageNumber)
+  getClassificationList () {
+    console.log('Requesting Classifications...')
+    return axios.get('/api/token/classification/list')
   },
+// 评论API
   removeComment (objectCommentId) {
     console.log('Removing Comment...')
     return axios.post('/api/token/comment/remove', objectCommentId)
+  },
+  getCommentList (objectPageNumber) {
+    console.log('Requesting Comments...')
+    return axios.post('/api/token/comment/list', objectPageNumber)
   }
 }

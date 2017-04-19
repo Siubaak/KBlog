@@ -58,7 +58,12 @@ module.exports = {
 // 文章相关API函数 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 新建文章
   createArticle (article) {
-    return Articles.create(article)
+    return Articles.create({
+                      title: article.title,
+                      intro: article.intro,
+                      body: article.body,
+                      classificationId: article.classificationId
+                   })
                    .exec()
   },
   // 根据文章ID删除文章
@@ -85,9 +90,9 @@ module.exports = {
   updateArticle (article) {
     return Articles.update({ _id: article._id }, { $set: {
                       title: article.title,
-                      classificationId: article.classificationId,
                       intro: article.intro,
-                      body: article.body
+                      body: article.body,
+                      classificationId: article.classificationId
                    } })
                    .exec()
   },

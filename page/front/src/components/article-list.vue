@@ -49,17 +49,17 @@ export default {
       this.loadArticles()
     },
     // 根据name是否为undefined来判断在首页还是分类
-    loadApi ({ name, page, number }) {
-      if (name) {
-        return api.getArticleListByClassification({ name, page, number })
+    loadApi () {
+      if (this.$route.params.name) {
+        return api.getArticleListByClassification({ name: this.$route.params.name, page: this.page, number: this.number })
       } else {
-        return api.getArticleList({ page, number })
+        return api.getArticleList({ page: this.page, number: this.number })
       }
     },
     loadArticles () {
       if (!this.isLoading && !this.isAll) {
         this.isLoading = true
-        this.loadApi({ name: this.$route.params.name, page: this.page, number: this.number })
+        this.loadApi()
           .then((res) => {
             if (res.data.articleList.length) {
               this.articles = this.articles.concat(res.data.articleList)

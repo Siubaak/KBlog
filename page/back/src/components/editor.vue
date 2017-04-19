@@ -1,6 +1,6 @@
 <template>
   <div id="editor" class="editor">
-    <form role="form" @submit.prevent="updateArticle">
+    <form role="form" @submit.prevent="saveArticle">
       <div class="form-group">
         <label for="title">标题</label>
         <input type="text" class="form-control" id="title" required v-model="article.title">
@@ -33,12 +33,13 @@
 <script>
 import api from '../api'
 export default {
-  props: ['articleItem'],
+  props: ['articleItem', 'isNew'],
   data () {
     return {
       article: {
         _id: this.articleItem._id,
         title: this.articleItem.title,
+        classificationId: this.articleItem.classificationId,
         classification: this.articleItem.classification,
         intro: this.articleItem.intro,
         body: this.articleItem.body
@@ -47,6 +48,13 @@ export default {
     }
   },
   methods: {
+    classificationIdQuery (name) {
+      for (var classificationItem of this.classifications) {
+        if (classificationItem.name === name) {
+          return classificationItem._id
+        }
+      }
+    },
     loadClassifications () {
       api.getClassificationList()
         .then((res) => {
@@ -58,9 +66,18 @@ export default {
           console.log('-- Error Receive')
         })
     },
-    updateArticle () {
-      api.updateArticle(this.article)
+    loadApi () {
+      if (this.isNew) {
+        return api.createArticle(this.article)
+      } else {
+        return api.updateArticle(this.article)
+      }
+    },
+    saveArticle () {
+      this.article.classificationId = this.classificationIdQuery(this.article.classification)
+      this.loadApi()
         .then((result) => {
+          this.$emit('save')
           console.log('-- Successful Update')
         })
         .catch((err) => {

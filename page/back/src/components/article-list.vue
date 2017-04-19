@@ -11,7 +11,7 @@
         <li class="list-group-item">
           <button type="button" data-toggle="collapse"
             href="#new-article" class="btn btn-primary btn-group btn-group-justified">新建文章</button>
-          <editor id="new-article" class="collapse" :articleItem="{}"></editor>
+          <editor id="new-article" class="collapse" :articleItem="{}" :isNew="true" @save="loadArticles"></editor>
         </li>
         <li class="list-group-item" v-for="(articleItem, index) in articles">
           <small><span class="glyphicon glyphicon-file"></span></small>
@@ -37,7 +37,7 @@
                 </li>
               </ul>
             </div>
-            <editor :id="articleItem._id" class="collapse" :articleItem="articleItem"></editor>
+            <editor :id="articleItem._id" class="collapse" :articleItem="articleItem" :isNew="false" @save="loadArticles"></editor>
           </div>
         </li>
         <li class="list-group-item" v-show="!articles.length">没有文章</li>
