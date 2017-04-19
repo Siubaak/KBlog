@@ -1,4 +1,4 @@
- var Admins = require('../lib/mongo').Admin,
+ var Admins = require('../lib/mongo').Admins,
      Classifications = require('../lib/mongo').Classifications,
      Articles = require('../lib/mongo').Articles,
      Comments = require('../lib/mongo').Comments,
@@ -83,7 +83,12 @@ module.exports = {
   },
   // 根据文章ID更新文章
   updateArticle (article) {
-    return Articles.update({ _id: article._id }, { $set: article })
+    return Articles.update({ _id: article._id }, { $set: {
+                      title: article.title,
+                      classificationId: article.classificationId,
+                      intro: article.intro,
+                      body: article.body
+                   } })
                    .exec()
   },
   // 根据文章ID获取一篇文章
@@ -145,7 +150,7 @@ module.exports = {
 // 分类相关API函数 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 新建分类
   createClassification (name) {
-    return Classifications.create(name)
+    return Classifications.create({ name })
                           .exec()
   },
   // 根据分类ID删除分类
@@ -174,7 +179,7 @@ module.exports = {
   },
   // 根据分类ID更新分类
   updateClassification (classification) {
-    return Classifications.update({ _id: classification._id }, { $set: classification })
+    return Classifications.update({ _id: classification._id }, { $set: { name: classification.name } })
                           .exec()
   },
   // 获取分类

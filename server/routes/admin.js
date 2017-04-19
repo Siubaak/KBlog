@@ -12,7 +12,6 @@ dotenv.load()
 router.post('/login', (req, res) => {
   console.log('POST /api/login')
   var { account, password } = req.body
-  // console.log(req.body)
   api.getAdmin(account)
      .then((admin) => {
        if (admin && (password === admin.password)) {

@@ -20,7 +20,7 @@ router.post('/article/list', (req, res) => {
 })
 router.post('/article/commentlist', (req, res) => {
   console.log('POST /api/article/commentlist')
-  var articleId = req.body.articleId
+  var { articleId } = req.body
   api.getCommentListByArticle(articleId)
      .then((commentList) => {
        res.send({ commentList })
@@ -46,7 +46,7 @@ router.post('/token/article/create', tokenCheck, (req, res) => {
 })
 router.post('/token/article/remove', tokenCheck, (req, res) => {
   console.log('POST /api/token/article/remove')
-  var articleId = req.body.articleId
+  var { articleId } = req.body
   api.removeArticle(articleId)
      .then((result) => {
        res.send({ result })
@@ -71,7 +71,7 @@ router.post('/token/article/update', tokenCheck, (req, res) => {
 router.post('/token/article', tokenCheck, (req, res) => {
   console.log('POST /api/token/article')
   // console.log(req.body)
-  var articleId = req.body.articleId
+  var { articleId } = req.body
   api.getArticle(articleId)
      .then((article) => {
        res.send({ article })

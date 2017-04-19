@@ -23,7 +23,9 @@
             </div>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-9">
-                <button type="submit" class="btn btn-primary">登录</button>
+                <button type="submit" class="btn btn-primary">
+                  <small><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></small> 登录
+                </button>
               </div>
             </div>
           </form>

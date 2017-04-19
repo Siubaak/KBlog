@@ -21,7 +21,7 @@ router.post('/comment/create', (req, res) => {
 // 后台API处理路由，带权限
 router.post('/token/comment/remove', tokenCheck, (req, res) => {
   console.log('POST /api/token/comment/remove')
-  var commentId = req.body.commentId
+  var { commentId } = req.body
   api.removeComment(commentId)
      .then((result) => {
        res.send({ result })

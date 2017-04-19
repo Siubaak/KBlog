@@ -25,6 +25,10 @@ export default {
     console.log('Requesting Classifications...')
     return axios.get('/api/token/classification/list')
   },
+  createClassification (objectName) {
+    console.log('Creating Classification...')
+    return axios.post('/api/token/classification/create', objectName)
+  },
   removeClassification (objectClassificationId) {
     console.log('Removing Classification...')
     return axios.post('/api/token/classification/remove', objectClassificationId)
@@ -39,6 +43,6 @@ export default {
   },
   removeComment (objectCommentId) {
     console.log('Removing Comment...')
-    return axios.post('../api/token/comment/remove', objectCommentId)
+    return axios.post('/api/token/comment/remove', objectCommentId)
   }
 }

@@ -28,6 +28,9 @@
               </router-link>
             </li>
           </ul>
+          <button type="button" class="btn btn-primary navbar-btn pull-right" @click="logout">
+            <small><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></small> 登出
+          </button>
         </div>
       </div>
     </nav>
@@ -44,6 +47,9 @@ export default {
     }
   },
   methods: {
+    logout () {
+      this.$store.dispatch('adminLogout')
+    },
     clickArticleList () {
       this.isArticleListActive = true
       this.isClassListActive = false

@@ -29,7 +29,7 @@
               <ul class="dropdown-menu">
                 <li v-for="classification in classificationList">
                   <router-link :to="'/classification/' + classification.name" @click.native="clickClass">
-                    <small><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></small>{{ classification.name }}
+                    <small><span class="glyphicon glyphicon-record" aria-hidden="true"></span></small> {{ classification.name }}
                   </router-link>
                 </li>
               </ul>

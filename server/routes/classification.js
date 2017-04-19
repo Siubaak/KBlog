@@ -33,7 +33,8 @@ router.post('/classification/articlelist', (req, res) => {
 // 后台API处理路由，带权限
 router.post('/token/classification/create', tokenCheck, (req, res) => {
   console.log('POST /api/classification/create')
-  var name = req.body.name
+  var { name } = req.body
+  console.log(name)
   api.createClassification(name)
      .then((result) => {
        res.send({ result })
@@ -45,7 +46,7 @@ router.post('/token/classification/create', tokenCheck, (req, res) => {
 })
 router.post('/token/classification/remove', tokenCheck, (req, res) => {
   console.log('POST /api/classification/remove')
-  var classificationId = req.body.classificationId
+  var { classificationId } = req.body
   api.removeClassification(classificationId)
      .then((result) => {
        res.send({ result })
@@ -57,7 +58,7 @@ router.post('/token/classification/remove', tokenCheck, (req, res) => {
 })
 router.post('/token/classification/update', tokenCheck, (req, res) => {
   console.log('POST /api/classification/update')
-  var classification = req.body
+  var { classification } = req.body
   api.updateClassification(classification)
      .then((result) => {
        res.send({ result })

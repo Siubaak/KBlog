@@ -23,7 +23,7 @@
       <div :id="article._id" class="collapse">
         <div class="panel-body">
           <div class="article-content" v-html="article.body"></div>
-          <button type="button" class="btn btn-sm btn-primary btn-comment" data-toggle="collapse" 
+          <button type="button" class="btn btn-default btn-comment btn-group btn-group-justified" data-toggle="collapse" 
                   :href="'#' + article._id + 'comment'" aria-expanded="false" aria-controls="collapseExample">
             <small><span class="glyphicon glyphicon-comment"></span></small> 评论
           </button>
@@ -34,7 +34,7 @@
                 <textarea v-model="comment.msg" type="text" class="form-control comment-box" 
                           rows="5" placeholder="内容" required>
                 </textarea>
-                <button type="submit" class="btn btn-sm btn-primary">
+                <button type="submit" class="btn btn-primary btn-group btn-group-justified">
                   <small><span class="glyphicon glyphicon-send"></span></small> 发表
                 </button>
               </form>
