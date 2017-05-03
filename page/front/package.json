@@ -19,7 +19,6 @@
     "jquery": "^3.2.1",
     "marked": "^0.3.6",
     "vue": "^2.2.2",
-    "vue-infinite-scroll": "^2.0.1",
     "vue-router": "^2.2.0"
   },
   "devDependencies": {

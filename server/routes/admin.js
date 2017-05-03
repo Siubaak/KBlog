@@ -10,7 +10,6 @@ dotenv.load()
 
 // 后台登录路由，返回token
 router.post('/login', (req, res) => {
-  console.log('POST /api/login')
   var { account, password } = req.body
   api.getAdmin(account)
      .then((admin) => {
@@ -19,11 +18,11 @@ router.post('/login', (req, res) => {
        } else {
          res.send({ msg: '用户名或密码错误' })
        }
-       console.log('-- Successful Response')
+       console.log(`-- Successful Response (${req.originalUrl}) !`)
      })
      .catch((err) => {
        res.send({ err })
-       console.log('-- Error Response')
+       console.log(`-- Error Response (${req.originalUrl}) !`)
      })
 })
 

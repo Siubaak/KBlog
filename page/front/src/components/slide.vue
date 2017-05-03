@@ -26,10 +26,13 @@
       <div class="panel-body">
         <ul class="ul-link">
           <li>
-            <a href="https://www.google.com" target="_blank">Google</a>
+            <a href="https://www.google.com" target="_blank">Google搜索</a>
           </li>
           <li>
-            <a href="https://github.com" target="_blank">Github</a>
+            <a href="https://github.com/Siubaak" target="_blank">我的Github</a>
+          </li>
+          <li>
+            <a href="https://www.zhihu.com/people/jkyau/activities" target="_blank">我的知乎</a>
           </li>
         </ul>
       </div>

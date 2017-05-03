@@ -83,24 +83,23 @@ export default {
                 this.comments = res.data.commentList
                 this.comment.user = ''
                 this.comment.msg = ''
-                console.log('-- Successful Create and Refresh')
               })
-              .catch((err) => {
-                console.log(err)
-                console.log('-- Successful Create but Error Refresh')
-              })
-          })
-          .catch((err) => {
-            console.log(err)
-            console.log('-- Error Create')
           })
       }
     }
   },
   created () {
     marked.setOptions({
-      highlight: (code) => {
-        return highlight.highlightAuto(code).value
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: false,
+      smartLists: true,
+      smartypants: false,
+      highlight: function (code) {
+      return highlight.highlightAuto(code).value
       }
     })
     this.body = marked(this.article.body)

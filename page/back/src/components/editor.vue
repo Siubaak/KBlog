@@ -78,15 +78,8 @@ export default {
             this.reset()
           }
           this.$emit('save')
-          console.log('-- Successful Update')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Update')
         })
     }
-  },
-  created () {
   }
 }
 </script>

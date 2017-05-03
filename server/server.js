@@ -5,14 +5,20 @@ var express = require('express'),
     bodyParser = require('body-parser')
 
 app.use(bodyParser.json())
-
-app.use(express.static('page/front/dist'))
-app.use(express.static('page/back/dist'))
-
+app.use(express.static('assets/front/dist'))
+app.use(express.static('assets/back/dist'))
+app.use((req, res, next) => {
+  console.log(`Processing ${req.method} ${req.originalUrl} ...`)
+  next()
+})
 routes(app)
 
 app.set('port', process.env.PORT || 3009);
 
-app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+app.listen(app.get('port'), (err) => {
+  if (!err) {
+    console.log(`Express server is listening on port ${app.get('port')} ...`)
+  } else {
+    console.log(err)
+  }
 });

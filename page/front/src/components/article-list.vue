@@ -64,18 +64,9 @@ export default {
             if (res.data.articleList.length) {
               this.articles = this.articles.concat(res.data.articleList)
               this.page++
-              console.log('-- Successful Receive')
-            } else if (res.data.err) {
-              console.log(res.data.err)
-              console.log('-- Error Receive')
-            } else {
+            } else if (!res.data.err) {
               this.isAll = true
             }
-            this.isLoading = false
-          })
-          .catch((err) => {
-            console.log(err)
-            console.log('-- Error Receive')
             this.isLoading = false
           })
       }

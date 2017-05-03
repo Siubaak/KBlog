@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <router-link class="navbar-brand" to="/">邱焱坤<small>的博客</small> 后台</router-link>
+          <router-link class="navbar-brand" to="/admin" @click.native="clickArticleList">邱焱坤<small>的博客</small> 后台</router-link>
         </div>
         <div class="collapse navbar-collapse" id="collapse-narbar">
           <ul class="nav navbar-nav">

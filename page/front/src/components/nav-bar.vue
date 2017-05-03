@@ -79,15 +79,7 @@ export default {
         .then((res) => {
           if (res.data.classList) {
             this.classificationList = res.data.classList
-            console.log('-- Successful Receive')
-          } else {
-            console.log(res.data.err)
-            console.log('-- Error Receive')
           }
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Receive')
         })
   }
 }

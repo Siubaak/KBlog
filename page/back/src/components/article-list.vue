@@ -74,22 +74,12 @@ export default {
         .then((res) => {
           this.articles = res.data.articleList
           this.isEditorShow = true
-          console.log('-- Successful Receive')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Receive')
         })
     },
     loadClassifications () {
       api.getClassificationList()
         .then((res) => {
           this.classifications = res.data.classList
-          console.log('-- Successful Receive')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Receive')
         })
     },
     removeArticle (index, articleId) {
@@ -98,11 +88,6 @@ export default {
         api.removeArticle({ articleId })
           .then((result) => {
             this.articles.splice(index, 1)
-            console.log('-- Successful Remove')
-          })
-          .catch((err) => {
-            console.log(err)
-            console.log('-- Error Remove')
           })
       }
     }

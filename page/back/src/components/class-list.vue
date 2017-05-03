@@ -77,11 +77,6 @@ export default {
       api.getClassificationList()
         .then((res) => {
           this.classifications = res.data.classList
-          console.log('-- Successful Receive')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Receive')
         })
     },
     createClassification () {
@@ -90,14 +85,9 @@ export default {
         .then((result) => {
           this.name = ''
           this.loadClassifications()
-          console.log('-- Successful Create')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Create')
         })
       } else {
-        console.log('请输入分类名称')
+        alert('请输入分类名称')
       }
     },
     bindClassification (classification) {
@@ -108,11 +98,6 @@ export default {
       api.updateClassification({ classification: this.classificationEdit })
         .then((result) => {
           this.loadClassifications()
-          console.log('-- Successful Update')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Update')
         })
     },
     removeClassification (index, classificationId) {
@@ -122,15 +107,9 @@ export default {
           .then((result) => {
             if (!result.data.err) {
               this.classifications.splice(index, 1)
-              console.log('-- Successful Remove')
             } else {
               alert(result.data.err)
-              console.log('-- Error Remove')
             }
-          })
-          .catch((err) => {
-            console.log(err)
-            console.log('-- Error Remove')
           })
       }
     }

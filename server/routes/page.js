@@ -4,16 +4,14 @@ var express = require('express'),
 
 // 前端页面返回路由
 router.get('/', (req, res) => {
-  console.log('GET /')
-  res.sendfile('page/front/dist/index.html')
-  console.log('-- Successful Response')
+  res.sendfile('assets/front/dist/index.html')
+  console.log(`-- Successful Response (${req.originalUrl}) !`)
 })
 
 // 后台页面返回路由
 router.get('/admin', (req, res) => {
-  console.log('GET /admin')
-  res.sendfile('page/back/dist/index.html')
-  console.log('-- Successful Response')
+  res.sendfile('assets/back/dist/index.html')
+  console.log(`-- Successful Response (${req.originalUrl}) !`)
 })
 
 module.exports = router

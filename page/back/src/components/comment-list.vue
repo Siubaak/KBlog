@@ -58,11 +58,6 @@ export default {
       api.getCommentList({ page: this.page, number: this.number })
         .then((res) => {
           this.comments = res.data.commentList
-          console.log('-- Successful Receive')
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('-- Error Receive')
         })
     },
     removeComment (index, commentId) {
@@ -71,11 +66,6 @@ export default {
         api.removeComment({ commentId })
           .then((result) => {
             this.comments.splice(index, 1)
-            console.log('-- Successful Remove')
-          })
-          .catch((err) => {
-            console.log(err)
-            console.log('-- Error Remove')
           })
       }
     }
