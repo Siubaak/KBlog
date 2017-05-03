@@ -23,9 +23,22 @@
         <li class="list-group-item" v-for="(classificationItem, index) in classifications">
           <small><span class="glyphicon glyphicon-record" aria-hidden="true"></span></small> {{ classificationItem.name }}
           <div class="edit-group">
-            <button type="button" data-toggle="collapse"
-              :href="'#' + classificationItem._id" class="btn btn-sm btn-primary"
-              @click="bindClassification(classificationItem)">编辑</button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"
+              @click="bindClassification(classificationItem)" aria-haspopup="true" aria-expanded="false">
+                编辑
+              </button>
+              <ul class="dropdown-menu">
+                <li class="delete">
+                  <div class="input-group">
+                    <input v-model="classificationEdit.name" type="text" class="form-control input-sm">
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-primary" type="button" @click="updateClassification">确认</button>
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-danger dropdown-toggle"
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

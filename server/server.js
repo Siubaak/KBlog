@@ -5,8 +5,6 @@ var express = require('express'),
     bodyParser = require('body-parser')
 
 app.use(bodyParser.json())
-app.use(express.static('assets/front/dist'))
-app.use(express.static('assets/back/dist'))
 app.use((req, res, next) => {
   console.log(`Processing ${req.method} ${req.originalUrl} ...`)
   next()

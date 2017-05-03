@@ -10,11 +10,7 @@
         <img class="profile img-responsive" src="../assets/img/profile.jpg"><br>
         <p><strong>邱焱坤</strong></p>
         <p>华南理工大学 硕士研究生</p>
-        <p>真结构工程师 伪C++ C# Javascript NodeJS程序员</p>
-        <p>
-          QQ：416142323<br>
-          邮箱：q.yk@qq.com
-        </p>
+        <p>真结构工程师 伪C++ C# Javascript Node.js程序员</p>
       </div>
     </div>
     <div class="panel panel-default">
@@ -24,15 +20,21 @@
         </h3>
       </div>
       <div class="panel-body">
-        <ul class="ul-link">
+        <ul class="ul-link list-inline">
           <li>
-            <a href="https://www.google.com" target="_blank">Google搜索</a>
+            <a href="https://github.com/Siubaak">Github</a>
           </li>
           <li>
-            <a href="https://github.com/Siubaak" target="_blank">我的Github</a>
+            <a href="https://twitter.com/_Siubaak">Twitter</a>
           </li>
           <li>
-            <a href="https://www.zhihu.com/people/jkyau/activities" target="_blank">我的知乎</a>
+            <a href="https://www.facebook.com/jimkwanyau">Facebook</a>
+          </li>
+          <li>
+            <a href="https://www.zhihu.com/people/jkyau/activities">知乎</a>
+          </li>
+          <li>
+            <a href="http://weibo.com/nimenwudi">微博</a>
           </li>
         </ul>
       </div>

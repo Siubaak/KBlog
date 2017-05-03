@@ -14,13 +14,13 @@
       <div class="form-group">
         <label for="intro">简介</label>
         <textarea type="text" class="form-control comment-box" id="intro"
-                  rows="5" v-model="article.intro" required>
+                  rows="3" v-model="article.intro" required>
         </textarea>
       </div>
       <div class="form-group">
         <label for="content">内容</label>
         <textarea type="text" class="form-control comment-box" id="content"
-                  rows="30" v-model="article.body" required>
+                  rows="7" v-model="article.body" required>
         </textarea>
       </div>
       <button type="submit" class="btn btn-primary btn-group btn-group-justified">

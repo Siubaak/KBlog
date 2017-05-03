@@ -14,7 +14,7 @@
         </h4>
       </div>
       <div class="panel-body">
-        <section class="sec-intro">{{ article.intro }}</section>
+        <div class="intro">{{ article.intro }}</div>
         <small><span class="glyphicon glyphicon-time"></span></small> {{ article.date }}
         <div v-show="comments.length" class="pull-right">
           <small><span class="p-color glyphicon glyphicon-comment"></span></small> ({{ comments.length }})
@@ -99,7 +99,7 @@ export default {
       smartLists: true,
       smartypants: false,
       highlight: function (code) {
-      return highlight.highlightAuto(code).value
+        return highlight.highlightAuto(code).value
       }
     })
     this.body = marked(this.article.body)
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style scoped>
-.sec-intro {
+.intro {
   padding-bottom: 10px;
 }
 .btn-comment {

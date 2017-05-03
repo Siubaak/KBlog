@@ -9,7 +9,9 @@
           <slide></slide>
         </div>
         <div class="col-sm-8">
-          <router-view keep-alive></router-view>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </div>
       </div>
     </div>

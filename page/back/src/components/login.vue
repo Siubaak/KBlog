@@ -10,20 +10,18 @@
         <div class="panel-body">
           <form class="form-horizontal" role="form" @submit.prevent="login">
             <div class="form-group">
-              <label for="account" class="col-sm-3 control-label">账号</label>
-              <div class="col-sm-8">
-                <input v-model="admin.account" type="text" class="form-control" id="account" required>
+              <div class="col-xs-12">
+                <input v-model="admin.account" type="text" class="form-control" placeholder="账号" required>
               </div>
             </div>
             <div class="form-group">
-              <label for="password" class="col-sm-3 control-label">密码</label>
-              <div class="col-sm-8">
-                <input v-model="admin.password" type="password" class="form-control" id="password" required>
+              <div class="col-xs-12">
+                <input v-model="admin.password" type="password" class="form-control" placeholder="密码" required>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-9">
-                <button type="submit" class="btn btn-primary">
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-primary btn-block">
                   <small><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></small> 登录
                 </button>
               </div>
