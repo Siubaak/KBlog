@@ -68,23 +68,12 @@ module.exports = {
   },
   // 根据文章ID删除文章
   removeArticle (articleId) {
-    return new Promise((resolve, reject) => {
+    return Promise.all([
       Articles.remove({ _id: articleId })
+              .exec(),
+      Comments.remove({ articleId: articleId })
               .exec()
-              .then((result) => {
-                Comments.remove({ articleId: articleId })
-                        .exec()
-                        .then((result) => {
-                          resolve(result)
-                        })
-                        .catch((err) => {
-                          reject(err)
-                        })
-              })
-              .catch((err) => {
-                reject(err)
-              })
-    })
+    ])
   },
   // 根据文章ID更新文章
   updateArticle (article) {
