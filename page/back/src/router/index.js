@@ -9,7 +9,7 @@ import CommentList from '../components/comment-list'
 
 Vue.use(Router)
 
-var router = new Router({
+let router = new Router({
   mode: 'history',
   routes: [{
     path: '/login',
@@ -39,7 +39,7 @@ var router = new Router({
 })
 
 router.beforeEach(({ path }, from, next) => {
-  var isLogin = Boolean(store.state.token)
+  let isLogin = Boolean(store.state.token)
   if (!isLogin && path !== '/login') {
     next('/login')
   } else if (isLogin && path === '/login') {

@@ -1,4 +1,4 @@
-var express = require('express'),
+let express = require('express'),
     path = require('path'),
     router = express.Router(),
     api = require('../api'),
@@ -6,7 +6,7 @@ var express = require('express'),
 
 // 前端API处理路由，不带权限
 router.post('/article/list', (req, res) => {
-  var { page, number } = req.body
+  let { page, number } = req.body
   api.getArticleList(page, number)
      .then((articleList) => {
        res.send({ articleList })
@@ -17,7 +17,7 @@ router.post('/article/list', (req, res) => {
      })
 })
 router.post('/article/commentlist', (req, res) => {
-  var { articleId } = req.body
+  let { articleId } = req.body
   api.getCommentListByArticle(articleId)
      .then((commentList) => {
        res.send({ commentList })
@@ -30,7 +30,7 @@ router.post('/article/commentlist', (req, res) => {
 
 // 后台API处理路由，带权限
 router.post('/token/article/create', tokenCheck, (req, res) => {
-  var article = req.body
+  let article = req.body
   api.createArticle(article)
      .then((result) => {
        res.send({ result })
@@ -41,7 +41,7 @@ router.post('/token/article/create', tokenCheck, (req, res) => {
      })
 })
 router.post('/token/article/remove', tokenCheck, (req, res) => {
-  var { articleId } = req.body
+  let { articleId } = req.body
   api.removeArticle(articleId)
      .then((result) => {
        res.send({ result })
@@ -52,7 +52,7 @@ router.post('/token/article/remove', tokenCheck, (req, res) => {
      })
 })
 router.post('/token/article/update', tokenCheck, (req, res) => {
-  var article = req.body
+  let article = req.body
   api.updateArticle(article)
      .then((result) => {
        res.send({ result })
@@ -63,7 +63,7 @@ router.post('/token/article/update', tokenCheck, (req, res) => {
      })
 })
 router.post('/token/article', tokenCheck, (req, res) => {
-  var { articleId } = req.body
+  let { articleId } = req.body
   api.getArticle(articleId)
      .then((article) => {
        res.send({ article })
@@ -74,7 +74,7 @@ router.post('/token/article', tokenCheck, (req, res) => {
      })
 })
 router.post('/token/article/list', tokenCheck, (req, res) => {
-  var { page, number } = req.body
+  let { page, number } = req.body
   api.getArticleList(page, number)
      .then((articleList) => {
        res.send({ articleList })

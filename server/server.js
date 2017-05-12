@@ -1,4 +1,4 @@
-var express = require('express'),
+let express = require('express'),
     path = require('path'),
     app = express(),
     routes = require('./routes'),

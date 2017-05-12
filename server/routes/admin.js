@@ -1,4 +1,4 @@
-var express = require('express'),
+let express = require('express'),
     path = require('path'),
     router = express.Router(),
     api = require('../api'),
@@ -10,7 +10,7 @@ dotenv.load()
 
 // 后台登录路由，返回token
 router.post('/login', (req, res) => {
-  var { account, password } = req.body
+  let { account, password } = req.body
   api.getAdmin(account)
      .then((admin) => {
        if (admin && (sha1(password) === admin.password)) {

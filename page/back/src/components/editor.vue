@@ -56,7 +56,7 @@ export default {
       this.article.classification = ''
     },
     classificationIdQuery (name) {
-      for (var classificationItem of this.classifications) {
+      for (let classificationItem of this.classifications) {
         if (classificationItem.name === name) {
           return classificationItem._id
         }

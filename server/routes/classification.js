@@ -1,4 +1,4 @@
-var express = require('express'),
+let express = require('express'),
     path = require('path'),
     router = express.Router(),
     api = require('../api'),
@@ -16,7 +16,7 @@ router.get('/classification/list', (req, res) => {
      })
 })
 router.post('/classification/articlelist', (req, res) => {
-  var { name, page, number } = req.body
+  let { name, page, number } = req.body
   api.getArticleListByClassification(name, page, number)
      .then((articleList) => {
        res.send({ articleList })
@@ -29,7 +29,7 @@ router.post('/classification/articlelist', (req, res) => {
 
 // 后台API处理路由，带权限
 router.post('/token/classification/create', tokenCheck, (req, res) => {
-  var { name } = req.body
+  let { name } = req.body
   console.log(name)
   api.createClassification(name)
      .then((result) => {
@@ -41,7 +41,7 @@ router.post('/token/classification/create', tokenCheck, (req, res) => {
      })
 })
 router.post('/token/classification/remove', tokenCheck, (req, res) => {
-  var { classificationId } = req.body
+  let { classificationId } = req.body
   api.removeClassification(classificationId)
      .then((result) => {
        res.send({ result })
@@ -52,7 +52,7 @@ router.post('/token/classification/remove', tokenCheck, (req, res) => {
      })
 })
 router.post('/token/classification/update', tokenCheck, (req, res) => {
-  var { classification } = req.body
+  let { classification } = req.body
   api.updateClassification(classification)
      .then((result) => {
        res.send({ result })

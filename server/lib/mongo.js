@@ -1,5 +1,5 @@
-var Mongolass = require('mongolass'),
-    mongolass = new Mongolass(),
+let Mongolass = require('mongolass'),
+    mongolass = new Mongolass('mongodb://localhost:27017/test'),
     moment = require('moment'),
     idToTs = require('objectid-to-timestamp'),
     Admins = mongolass.model('Admin', {
@@ -20,10 +20,8 @@ var Mongolass = require('mongolass'),
       msg: { type: 'string' },
       articleId: { type: Mongolass.Types.ObjectId }
     })
-// 连接数据库
-mongolass.connect('mongodb://localhost:27017/test')
 // 注册插件，转化objectId为timestamp，再转化为YYYY-MM-DD HH:mm:ss格式时间并储存在date中
-var transferTime = (result) => {
+let transferTime = (result) => {
   if (result) {
     result.forEach((item) => {
       item.date = moment(idToTs(item._id)).format('YYYY-MM-DD HH:mm:ss')

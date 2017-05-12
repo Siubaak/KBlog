@@ -1,4 +1,4 @@
- var Admins = require('../lib/mongo').Admins,
+ let Admins = require('../lib/mongo').Admins,
      Classifications = require('../lib/mongo').Classifications,
      Articles = require('../lib/mongo').Articles,
      Comments = require('../lib/mongo').Comments,
@@ -8,20 +8,20 @@
        // 获取文章成功，查询分类及评论
        async.map(articles, (articleItem, callback) => {
          Classifications.findOne({ _id: articleItem.classificationId })
-                        .exec()
-                        .then((classification) => {
-                          // 获取分类成功，查询评论
-                          articleItem.classification = classification.name
-                          Comments.find({ articleId: articleItem._id })
-                                  .addDate()
-                                  .sort({ _id: -1 })
-                                  .exec()
-                                  .then((comments) => {
-                                    // 获取评论成功，进行回调
-                                    articleItem.comments = comments
-                                    callback(null, articleItem)
-                                  })
-                        })
+           .exec()
+           .then((classification) => {
+             // 获取分类成功，查询评论
+             articleItem.classification = classification.name
+             return Comments.find({ articleId: articleItem._id })
+               .addDate()
+               .sort({ _id: -1 })
+               .exec()
+           })
+           .then((comments) => {
+             // 获取评论成功，进行回调
+             articleItem.comments = comments
+             callback(null, articleItem)
+           })
        }, (err, articles) => {
          if (!err) {
            resolve(articles)
@@ -35,11 +35,11 @@
        // 获取评论成功，查询文章
        async.map(comments, (commentItem, callback) => {
          Articles.findOne({ _id: commentItem.articleId })
-                 .exec()
-                 .then((article) => {
-                   commentItem.article = article
-                   callback(null, commentItem)
-                 })
+           .exec()
+           .then((article) => {
+             commentItem.article = article
+             callback(null, commentItem)
+           })
        }, (err, comments) => {
          if (!err) {
            resolve(comments)
@@ -104,7 +104,7 @@ module.exports = {
     if (number) {
       // 当number不为0时，数据库查询跳过page*number数量
       return new Promise((resolve, reject) => {
-        var skip = page * number
+        let skip = page * number
         Articles.find()
                 .addDate()
                 .sort({ _id: -1 })
@@ -185,7 +185,7 @@ module.exports = {
   // 根据分类获取该分类下的所有文章
   getArticleListByClassification(name, page, number) {
     return new Promise((resolve, reject) => {
-      var skip = page*number
+      let skip = page*number
       Classifications.findOne({ name: name })
                      .exec()
                      .then((classResult) => {
@@ -219,7 +219,7 @@ module.exports = {
   getCommentList (page, number) {
     if (number) {
       // 当number不为0时，数据库查询跳过page*number数量
-      var skip = page*number
+      let skip = page*number
       return new Promise((resolve, reject) => {
         Comments.find()
                 .addDate()

@@ -1,4 +1,4 @@
-var express = require('express'),
+let express = require('express'),
     path = require('path'),
     router = express.Router(),
     api = require('../api'),
@@ -6,7 +6,7 @@ var express = require('express'),
 
 // 前端API处理路由，不带权限
 router.post('/comment/create', (req, res) => {
-  var comment = req.body
+  let comment = req.body
   api.createComment(comment)
      .then((result) => {
        res.send({ result })
@@ -19,7 +19,7 @@ router.post('/comment/create', (req, res) => {
 
 // 后台API处理路由，带权限
 router.post('/token/comment/remove', tokenCheck, (req, res) => {
-  var { commentId } = req.body
+  let { commentId } = req.body
   api.removeComment(commentId)
      .then((result) => {
        res.send({ result })
@@ -30,7 +30,7 @@ router.post('/token/comment/remove', tokenCheck, (req, res) => {
      })
 })
 router.post('/token/comment/list', tokenCheck, (req, res) => {
-  var { page, number } = req.body
+  let { page, number } = req.body
   api.getCommentList(page, number)
      .then((commentList) => {
        res.send({ commentList })
