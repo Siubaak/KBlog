@@ -29,3 +29,10 @@ export default {
   }
 }
 </script>
+
+<style>
+body {
+  background-color: #ECF4F7 !important;
+  padding: 70px 0px 20px 0px;
+}
+</style>

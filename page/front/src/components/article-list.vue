@@ -65,13 +65,16 @@ export default {
               if (res.data.articleList.length) {
                 this.articles = this.articles.concat(res.data.articleList)
                 this.page++
-              } else if (!res.data.err) {
+              } else {
                 this.isAll = true
               }
             } else {
               alert(res.data.msg)
             }
             this.isLoading = false
+          }).catch((err) => {
+            console.error(err)
+            alert('获取文章列表出错，请稍后再试')
           })
       }
     }

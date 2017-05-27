@@ -62,6 +62,9 @@ export default {
           } else {
             alert(res.data.msg)
           }
+        }).catch((err) => {
+          console.error(err)
+          alert('获取回复列表出错，请稍后再试')
         })
     },
     removeComment (index, commentId) {
@@ -74,6 +77,9 @@ export default {
             } else {
               alert(res.data.msg)
             }
+          }).catch((err) => {
+            console.error(err)
+            alert('删除回复出错，请稍后再试')
           })
       }
     }

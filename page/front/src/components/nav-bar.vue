@@ -76,13 +76,16 @@ export default {
   },
   created () {
     api.getClassificationList()
-        .then((res) => {
-          if (res.status === 200) {
-            this.classificationList = res.data.classList
-          } else {
-            alert(res.data.msg)
-          }
-        })
+      .then((res) => {
+        if (res.status === 200) {
+          this.classificationList = res.data.classList
+        } else {
+          alert(res.data.msg)
+        }
+      }).catch((err) => {
+        console.error(err)
+        alert('获取分类列表出错，请稍后再试')
+      })
   }
 }
 </script>

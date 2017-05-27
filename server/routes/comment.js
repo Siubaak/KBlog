@@ -6,7 +6,7 @@ let express = require('express'),
 
 // 前端API处理路由，不带权限
 router.post('/comment/create', async (req, res) => {
-  let comment = req.body
+  let { comment } = req.body
   try {
     await api.createComment(comment)
     res.status(200).end()

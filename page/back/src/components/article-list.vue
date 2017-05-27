@@ -78,6 +78,9 @@ export default {
           } else {
             alert(res.data.msg)
           }
+        }).catch((err) => {
+          console.error(err)
+          alert('获取文章列表出错，请稍后再试')
         })
     },
     loadClassifications () {
@@ -88,6 +91,9 @@ export default {
           } else {
             alert(res.data.msg)
           }
+        }).catch((err) => {
+          console.error(err)
+          alert('获取分类列表出错，请稍后再试')
         })
     },
     removeArticle (index, articleId) {
@@ -100,6 +106,9 @@ export default {
             } else {
               alert(res.data.msg)
             }
+          }).catch((err) => {
+            console.error(err)
+            alert('删除文章出错，请稍后再试')
           })
       }
     }

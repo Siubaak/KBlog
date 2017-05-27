@@ -28,7 +28,7 @@ router.post('/article/commentlist', async (req, res) => {
 
 // 后台API处理路由，带权限
 router.post('/token/article/create', tokenCheck, async (req, res) => {
-  let article = req.body
+  let { article } = req.body
   try {
     await api.createArticle(article)
     res.status(200).end()
@@ -48,7 +48,7 @@ router.post('/token/article/remove', tokenCheck, async (req, res) => {
   }
 })
 router.post('/token/article/update', tokenCheck, async (req, res) => {
-  let article = req.body
+  let { article } = req.body
   try {
     await api.updateArticle(article)
     res.status(200).end()

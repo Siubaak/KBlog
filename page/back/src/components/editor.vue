@@ -64,21 +64,26 @@ export default {
     },
     loadApi () {
       if (!this.articleItem._id) {
-        return api.createArticle(this.article)
+        return api.createArticle({ article: this.article })
       } else {
-        return api.updateArticle(this.article)
+        return api.updateArticle({ article: this.article })
       }
     },
     saveArticle () {
       this.article.classificationId = this.classificationIdQuery(this.article.classification)
       this.loadApi()
         .then((res) => {
-          if (res.status === 200 && !this.articleItem._id) {
-            this.reset()
+          if (res.status === 200) {
+            if (!this.articleItem._id) {
+              this.reset()
+            }
           } else {
             alert(res.data.msg)
           }
           this.$emit('save')
+        }).catch((err) => {
+          console.error(err)
+          alert('保存文章出错，请稍后再试')
         })
     }
   }

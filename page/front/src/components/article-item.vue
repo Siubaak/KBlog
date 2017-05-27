@@ -76,7 +76,7 @@ export default {
   methods: {
     submit () {
       if (this.comment.user && this.comment.msg) {
-        api.createComment(this.comment)
+        api.createComment({ comment: this.comment })
           .then((res) => {
             if (res.status === 200) {
               api.getCommentListByArticle({ articleId: this.article._id })
@@ -88,10 +88,16 @@ export default {
                   } else {
                     alert(res.date.msg)
                   }
+                }).catch((err) => {
+                  console.error(err)
+                  alert('获取回复列表出错，请稍后再试')
                 })
             } else {
               alert(res.date.msg)
             }
+          }).catch((err) => {
+            console.error(err)
+            alert('回复出错，请稍后再试')
           })
       }
     }

@@ -94,6 +94,9 @@ export default {
           } else {
             alert(res.data.msg)
           }
+        }).catch((err) => {
+          console.error(err)
+          alert('删除分类列表出错，请稍后再试')
         })
     },
     createClassification () {
@@ -106,6 +109,9 @@ export default {
           } else {
             alert(res.data.msg)
           }
+        }).catch((err) => {
+          console.error(err)
+          alert('创建分类出错，请稍后再试')
         })
       } else {
         alert('请输入分类名称')
@@ -123,6 +129,9 @@ export default {
           } else {
             alert(res.data.msg)
           }
+        }).catch((err) => {
+          console.error(err)
+          alert('更新分类出错，请稍后再试')
         })
     },
     removeClassification (index, classificationId) {
@@ -135,6 +144,9 @@ export default {
             } else {
               alert(res.data.msg)
             }
+          }).catch((err) => {
+            console.error(err)
+            alert('删除分类出错，请稍后再试')
           })
       }
     }
