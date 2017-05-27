@@ -61,11 +61,15 @@ export default {
         this.isLoading = true
         this.loadApi()
           .then((res) => {
-            if (res.data.articleList.length) {
-              this.articles = this.articles.concat(res.data.articleList)
-              this.page++
-            } else if (!res.data.err) {
-              this.isAll = true
+            if (res.status === 200) {
+              if (res.data.articleList.length) {
+                this.articles = this.articles.concat(res.data.articleList)
+                this.page++
+              } else if (!res.data.err) {
+                this.isAll = true
+              }
+            } else {
+              alert(res.data.msg)
             }
             this.isLoading = false
           })

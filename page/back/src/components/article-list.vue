@@ -72,22 +72,34 @@ export default {
       this.isEditorShow = false
       api.getArticleList({ page: this.page, number: this.number })
         .then((res) => {
-          this.articles = res.data.articleList
-          this.isEditorShow = true
+          if (res.status === 200) {
+            this.articles = res.data.articleList
+            this.isEditorShow = true
+          } else {
+            alert(res.data.msg)
+          }
         })
     },
     loadClassifications () {
       api.getClassificationList()
         .then((res) => {
-          this.classifications = res.data.classList
+          if (res.status === 200) {
+            this.classifications = res.data.classList
+          } else {
+            alert(res.data.msg)
+          }
         })
     },
     removeArticle (index, articleId) {
       if (this.ok === 'ok') {
         this.ok = ''
         api.removeArticle({ articleId })
-          .then((result) => {
-            this.articles.splice(index, 1)
+          .then((res) => {
+            if (res.status === 200) {
+              this.articles.splice(index, 1)
+            } else {
+              alert(res.data.msg)
+            }
           })
       }
     }

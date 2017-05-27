@@ -11,7 +11,7 @@ app.use((req, res, next) => {
 })
 routes(app)
 
-app.set('port', process.env.PORT || 3009);
+app.set('port', process.env.PORT || 3009)
 
 app.listen(app.get('port'), (err) => {
   if (!err) {
@@ -19,4 +19,4 @@ app.listen(app.get('port'), (err) => {
   } else {
     console.log(err)
   }
-});
+})

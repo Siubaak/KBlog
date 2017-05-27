@@ -89,15 +89,23 @@ export default {
     loadClassifications () {
       api.getClassificationList()
         .then((res) => {
-          this.classifications = res.data.classList
+          if (res.status === 200) {
+            this.classifications = res.data.classList
+          } else {
+            alert(res.data.msg)
+          }
         })
     },
     createClassification () {
       if (this.name) {
         api.createClassification({ name: this.name })
-        .then((result) => {
-          this.name = ''
-          this.loadClassifications()
+        .then((res) => {
+          if (res.status === 200) {
+            this.name = ''
+            this.loadClassifications()
+          } else {
+            alert(res.data.msg)
+          }
         })
       } else {
         alert('请输入分类名称')
@@ -109,19 +117,23 @@ export default {
     },
     updateClassification () {
       api.updateClassification({ classification: this.classificationEdit })
-        .then((result) => {
-          this.loadClassifications()
+        .then((res) => {
+          if (res.status === 200) {
+            this.loadClassifications()
+          } else {
+            alert(res.data.msg)
+          }
         })
     },
     removeClassification (index, classificationId) {
       if (this.ok === 'ok') {
         this.ok = ''
         api.removeClassification({ classificationId })
-          .then((result) => {
-            if (!result.data.err) {
+          .then((res) => {
+            if (res.status === 200) {
               this.classifications.splice(index, 1)
             } else {
-              alert(result.data.err)
+              alert(res.data.msg)
             }
           })
       }

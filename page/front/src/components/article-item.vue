@@ -78,12 +78,20 @@ export default {
       if (this.comment.user && this.comment.msg) {
         api.createComment(this.comment)
           .then((res) => {
-            api.getCommentListByArticle({ articleId: this.article._id })
-              .then((res) => {
-                this.comments = res.data.commentList
-                this.comment.user = ''
-                this.comment.msg = ''
-              })
+            if (res.status === 200) {
+              api.getCommentListByArticle({ articleId: this.article._id })
+                .then((res) => {
+                  if (res.status === 200) {
+                    this.comments = res.data.commentList
+                    this.comment.user = ''
+                    this.comment.msg = ''
+                  } else {
+                    alert(res.date.msg)
+                  }
+                })
+            } else {
+              alert(res.date.msg)
+            }
           })
       }
     }

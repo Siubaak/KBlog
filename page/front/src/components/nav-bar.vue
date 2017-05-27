@@ -77,8 +77,10 @@ export default {
   created () {
     api.getClassificationList()
         .then((res) => {
-          if (res.data.classList) {
+          if (res.status === 200) {
             this.classificationList = res.data.classList
+          } else {
+            alert(res.data.msg)
           }
         })
   }

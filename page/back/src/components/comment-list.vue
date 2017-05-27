@@ -57,15 +57,23 @@ export default {
     loadComments () {
       api.getCommentList({ page: this.page, number: this.number })
         .then((res) => {
-          this.comments = res.data.commentList
+          if (res.status === 200) {
+            this.comments = res.data.commentList
+          } else {
+            alert(res.data.msg)
+          }
         })
     },
     removeComment (index, commentId) {
       if (this.ok === 'ok') {
         this.ok = ''
         api.removeComment({ commentId })
-          .then((result) => {
-            this.comments.splice(index, 1)
+          .then((res) => {
+            if (res.status === 200) {
+              this.comments.splice(index, 1)
+            } else {
+              alert(res.data.msg)
+            }
           })
       }
     }

@@ -5,84 +5,77 @@ let express = require('express'),
     tokenCheck = require('../token-mw/token-check')
 
 // 前端API处理路由，不带权限
-router.post('/article/list', (req, res) => {
+router.post('/article/list', async (req, res) => {
   let { page, number } = req.body
-  api.getArticleList(page, number)
-     .then((articleList) => {
-       res.send({ articleList })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    let articleList = await api.getArticleList(page, number)
+    res.status(200).send({ articleList })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/article/commentlist', (req, res) => {
+router.post('/article/commentlist', async (req, res) => {
   let { articleId } = req.body
-  api.getCommentListByArticle(articleId)
-     .then((commentList) => {
-       res.send({ commentList })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    let commentList = await api.getCommentListByArticle(articleId)
+    res.status(200).send({ commentList })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
 
 // 后台API处理路由，带权限
-router.post('/token/article/create', tokenCheck, (req, res) => {
+router.post('/token/article/create', tokenCheck, async (req, res) => {
   let article = req.body
-  api.createArticle(article)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    await api.createArticle(article)
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/token/article/remove', tokenCheck, (req, res) => {
+router.post('/token/article/remove', tokenCheck, async (req, res) => {
   let { articleId } = req.body
-  api.removeArticle(articleId)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    await api.removeArticle(articleId)
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/token/article/update', tokenCheck, (req, res) => {
+router.post('/token/article/update', tokenCheck, async (req, res) => {
   let article = req.body
-  api.updateArticle(article)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    await api.updateArticle(article)
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/token/article', tokenCheck, (req, res) => {
+router.post('/token/article', tokenCheck, async (req, res) => {
   let { articleId } = req.body
-  api.getArticle(articleId)
-     .then((article) => {
-       res.send({ article })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    let article = await api.getArticle(articleId)
+    res.status(200).send({ article })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/token/article/list', tokenCheck, (req, res) => {
+router.post('/token/article/list', tokenCheck, async (req, res) => {
   let { page, number } = req.body
-  api.getArticleList(page, number)
-     .then((articleList) => {
-       res.send({ articleList })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    let articleList = await api.getArticleList(page, number)
+    res.status(200).send({ articleList })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
 
 module.exports = router

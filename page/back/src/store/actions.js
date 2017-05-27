@@ -4,24 +4,19 @@ export default {
   adminLogin ({ commit }, objectAccountPassword) {
     api.adminLogin(objectAccountPassword)
       .then((res) => {
-        if (res.data.token) {
+        if (res.status === 200) {
           commit('ADMIN_LOGIN', res.data.token)
           router.replace({ path: '/admin' })
-          console.log('-- Successful Login')
         } else {
-          alert(res.data.msg || res.data.err)
-          console.log('-- Error Login')
+          alert(res.data.msg)
         }
-      })
-      .catch((err) => {
-        console.log(err)
-        console.log('-- Error Login')
+      }).catch((err) => {
+        console.error(err)
+        alert('登录出错，请稍后再试')
       })
   },
   adminLogout ({ commit }) {
-    console.log('Logouting...')
     commit('ADMIN_LOGOUT')
     router.push({ path: '/login' })
-    console.log('-- Successful Logout')
   }
 }

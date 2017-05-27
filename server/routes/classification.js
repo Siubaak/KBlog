@@ -5,72 +5,68 @@ let express = require('express'),
     tokenCheck = require('../token-mw/token-check')
 
 // 前端API处理路由，不带权限
-router.get('/classification/list', (req, res) => {
-  api.getClassificationList()
-     .then((classList) => {
-       res.send({ classList })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+router.get('/classification/list', async (req, res) => {
+  try {
+    let classList = await api.getClassificationList()
+    res.status(200).send({ classList })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/classification/articlelist', (req, res) => {
+router.post('/classification/articlelist', async (req, res) => {
   let { name, page, number } = req.body
-  api.getArticleListByClassification(name, page, number)
-     .then((articleList) => {
-       res.send({ articleList })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    let articleList = await api.getArticleListByClassification(name, page, number)
+    res.status(200).send({ articleList })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
 
 // 后台API处理路由，带权限
-router.post('/token/classification/create', tokenCheck, (req, res) => {
+router.post('/token/classification/create', tokenCheck, async (req, res) => {
   let { name } = req.body
-  console.log(name)
-  api.createClassification(name)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    await api.createClassification(name)
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/token/classification/remove', tokenCheck, (req, res) => {
+router.post('/token/classification/remove', tokenCheck, async (req, res) => {
   let { classificationId } = req.body
-  api.removeClassification(classificationId)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    let result = await api.removeClassification(classificationId)
+    if (result === 'Left') {
+      res.status(299).send({ code: 'data:article_left', msg: '分类中文章未删除，无法删除该分类' })
+    }
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/token/classification/update', tokenCheck, (req, res) => {
+router.post('/token/classification/update', tokenCheck, async (req, res) => {
   let { classification } = req.body
-  api.updateClassification(classification)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    await api.updateClassification(classification)
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.get('/token/classification/list', tokenCheck, (req, res) => {
-  api.getClassificationList()
-     .then((classList) => {
-       res.send({ classList })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+router.get('/token/classification/list', tokenCheck, async (req, res) => {
+  try {
+    let classList = await api.getClassificationList()
+    res.status(200).send({ classList })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
 
 module.exports = router

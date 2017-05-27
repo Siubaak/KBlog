@@ -72,10 +72,11 @@ export default {
     saveArticle () {
       this.article.classificationId = this.classificationIdQuery(this.article.classification)
       this.loadApi()
-        .then((result) => {
-          if (!this.articleItem._id) {
-            // 新建文章后清空数据
+        .then((res) => {
+          if (res.status === 200 && !this.articleItem._id) {
             this.reset()
+          } else {
+            alert(res.data.msg)
           }
           this.$emit('save')
         })

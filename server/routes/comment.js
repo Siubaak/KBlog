@@ -5,40 +5,37 @@ let express = require('express'),
     tokenCheck = require('../token-mw/token-check')
 
 // 前端API处理路由，不带权限
-router.post('/comment/create', (req, res) => {
+router.post('/comment/create', async (req, res) => {
   let comment = req.body
-  api.createComment(comment)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    await api.createComment(comment)
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
 
 // 后台API处理路由，带权限
-router.post('/token/comment/remove', tokenCheck, (req, res) => {
+router.post('/token/comment/remove', tokenCheck, async (req, res) => {
   let { commentId } = req.body
-  api.removeComment(commentId)
-     .then((result) => {
-       res.send({ result })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    await api.removeComment(commentId)
+    res.status(200).end()
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
-router.post('/token/comment/list', tokenCheck, (req, res) => {
+router.post('/token/comment/list', tokenCheck, async (req, res) => {
   let { page, number } = req.body
-  api.getCommentList(page, number)
-     .then((commentList) => {
-       res.send({ commentList })
-       console.log(`-- Successful Response (${req.originalUrl}) !`)
-     }).catch((err) => {
-       res.send({ err })
-       console.log(`-- Error Response (${req.originalUrl}) !`)
-     })
+  try {
+    let commentList = await api.getCommentList(page, number)
+    res.status(200).send({ commentList })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send({ code: 'internal:unknow_error', msg: err })
+  }
 })
 
 module.exports = router

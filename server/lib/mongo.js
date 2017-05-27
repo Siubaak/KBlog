@@ -1,5 +1,5 @@
 let Mongolass = require('mongolass'),
-    mongolass = new Mongolass('mongodb://localhost:27017/test'),
+    mongolass = new Mongolass('mongodb://127.0.0.1:27017/test'),
     moment = require('moment'),
     idToTs = require('objectid-to-timestamp'),
     Admins = mongolass.model('Admin', {
