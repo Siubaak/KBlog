@@ -2,7 +2,8 @@ let express = require('express'),
     path = require('path'),
     app = express(),
     routes = require('./routes'),
-    bodyParser = require('body-parser')
+    bodyParser = require('body-parser'),
+    conf = require('./conf')
 
 app.use(bodyParser.json())
 app.use((req, res, next) => {
@@ -11,11 +12,9 @@ app.use((req, res, next) => {
 })
 routes(app)
 
-app.set('port', process.env.PORT || 3009)
-
-app.listen(app.get('port'), (err) => {
+app.listen(conf.serverPort, (err) => {
   if (!err) {
-    console.log(`Express server is listening on port ${app.get('port')} ...`)
+    console.log(`Express server is listening on port ${conf.serverPort} ...`)
   } else {
     console.log(err)
   }

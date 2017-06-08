@@ -1,8 +1,8 @@
 import axios from 'axios'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 let insertToken = () => {
-  if (localStorage.getItem('jwt')) {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwtf').replace(/(^\\")|(\\"$)/g, '')
+  if (localStorage.getItem('kblogjwt')) {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('kblogjwt').replace(/(^\\")|(\\"$)/g, '')
   }
 }
 

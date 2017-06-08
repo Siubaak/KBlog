@@ -1,5 +1,6 @@
 let Mongolass = require('mongolass'),
-    mongolass = new Mongolass('mongodb://127.0.0.1:27017/test'),
+    conf = require('../conf'),
+    mongolass = new Mongolass(`mongodb://${conf.dbIP}:${conf.dbPort}/${conf.dbName}`),
     moment = require('moment'),
     idToTs = require('objectid-to-timestamp'),
     Admins = mongolass.model('Admin', {

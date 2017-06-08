@@ -3,10 +3,7 @@ let express = require('express'),
     router = express.Router(),
     api = require('../api'),
     tokenCreate = require('../token-mw/token-create'),
-    sha1 = require('sha1'),
-    dotenv = require('dotenv')
-
-dotenv.load()
+    sha1 = require('sha1')
 
 // 后台登录路由，返回token
 router.post('/login', async (req, res) => {
